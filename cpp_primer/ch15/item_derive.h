@@ -18,8 +18,8 @@ public:
     virtual ~Item_base() { /* cout << "~Item_base()" << endl;*/ }
 
     string book() const { return isbn; }
-    virtual double net_price() const { return price; }
-    virtual Item_base* clone() { return new Item_base(*this); }
+    virtual double net_price(size_t count) const { return price; }
+    virtual Item_base* clone() const { return new Item_base(*this); }
     virtual void debug() const { if(debug_enable) print_member(); }
     virtual void debug(bool enable) const { if(enable) print_member(); }
 
@@ -72,8 +72,8 @@ public:
         return std::make_pair(qty, discount);
     }
 
-    virtual double net_price() const { return 0; }
-    virtual Disc_item* clone() { return new Disc_item(*this); }
+    virtual double net_price(size_t count) const { return 0; }
+    virtual Disc_item* clone() const { return new Disc_item(*this); }
     virtual void debug() const;
     virtual void debug(bool enable) const;
 
@@ -139,8 +139,8 @@ public:
 
     virtual ~Bulk_item() { /* cout << "~Bulk_item()" << endl; */ }
 
-    virtual double net_price() { return 0; }
-    virtual Bulk_item* clone() { return new Bulk_item(*this); }
+    virtual double net_price(size_t count) { return 0; }
+    virtual Bulk_item* clone() const { return new Bulk_item(*this); }
 
     virtual void debug() const;
     virtual void debug(bool enable) const;
